@@ -1,3 +1,5 @@
+<img src="https://www.yegor256.com/favicon.ico" width="32px" height="32px" />
+
 [![Build Status](https://travis-ci.org/yegor256/articles.svg)](https://travis-ci.org/yegor256/articles)
 
 Some papers I write for some magazines.
