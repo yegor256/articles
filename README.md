@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/yegor256/papers.svg)](https://travis-ci.org/yegor256/papers)
+[![Build Status](https://travis-ci.org/yegor256/articles.svg)](https://travis-ci.org/yegor256/articles)
 
 Some papers I write for some magazines.
 
