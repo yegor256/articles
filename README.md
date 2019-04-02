@@ -2,7 +2,12 @@
 
 Some papers I write for some magazines.
 
-To build them all you have to install Ruby, Bundle, and LaTeX. Then:
+To build them all you have to install
+[Ruby 2.3+](https://www.ruby-lang.org/en/documentation/installation/),
+[Rubygems](https://rubygems.org/pages/download),
+[Bundler](https://bundler.io/),
+and [LaTeX](https://www.latex-project.org/get/).
+Then:
 
 ```bash
 $ bundle update
