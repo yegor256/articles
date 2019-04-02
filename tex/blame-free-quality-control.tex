@@ -1,0 +1,242 @@
+\documentclass{main}
+\title{Blame-Free Quality Control}
+\begin{document}
+\begin{abstract}
+How liable should programmers be for the quality of their software?
+The question may seem strange. Who else besides programmers should
+responsible for the product they create? However, an alternative philosophy exists
+suggesting that the programmer's primary responsibility is delivery speed. The
+responsibility of the project's quality must be a project concern.
+\end{abstract}
+
+Programmers write software designed to work as intended with the source code. During this process,
+they create defective code or ``bugs.''
+One of the main
+goals of any software project is to reduce the number of bugs while increasing the
+quality.
+
+There are well-known methods for bug finding in the source code and the product, including manual
+testing and peer reviews. However, these methods are rather reactive---they find bugs when
+the code already contains them, sometimes already after shipping the product to the
+users.
+Preventive methods for increasing the code's quality are often more desirable because they are cheaper.
+
+One of the most popular and least obvious methods is to ``hire
+better programmers.''
+\textcite{munson2003},
+for example, says that ``a good programmer will produce fault-free code, while
+a bad programmer will produce code that is fault-ridden.''
+This is a widespread misconception.
+We used to believe that more professional, expensive, and talented
+programmers are capable of writing bug-free code. However, this is not true.
+
+``We do not make mistakes all the time, but we consistently
+make a certain number, even when we are being careful,'' says
+\textcite{panko1996}.
+Moreover, \textcite{yb-bugfree14} argues that the correlation
+between a programmer's experience and the rate he or she makes mistakes seems to be the opposite:
+more experienced developers generate more bugs,
+while novice developers usually generate fewer, larger bugs.
+Even if this may not be true for all projects and teams, and
+``there are big differences between programmers'', it is
+true that ``no one's work is error-free,'' according to~\textcite{kaner99}.
+
+\textcite{beizer1990} even demonstrated that there is
+a very predictable amount of bugs an average programmer produces:
+2.4 per thousand source statements. The measurement was taken almost 30
+years ago when languages were way more verbose and low-level, like C, Pascal,
+and Assembly. For modern languages, like Java, Ruby, Python, or JavaScript, ones that require
+much fewer statements to accomplish similar or more complex tasks, three
+bugs per a thousand lines of code sounds like a very optimistic estimate---we
+make mistakes more often nowadays.
+
+The next equally questionable method of increasing the code's quality is to blame
+programmers for the bugs they make. The negative effect of this approach, also
+known as ``Fear Driven Development,''
+is greater than its benefits: programmers become more stressed, work much slower, and throw away a lot more code.
+These effects are inherently counterproductive to software development.
+As~\textcite{evans14} said in her famous blog post \citetitle{evans14},
+``If you're scared of making changes, you can't make something dramatically
+better, or do that big code cleanup. Maybe you can't even deploy the code
+that you already wrote and tested, because it feels too scary. You
+just want to stick what's sort-of-working, even if it's not great.''
+
+Thus, all programmers make mistakes, but they should not be punished for these mistakes.
+This seems like a paradox. What can be done to decrease
+the number of defects in a code and at the same time allow programmers to feel
+free to make them? There is a solution.
+
+Instead of blaming them for the code quality,
+it would be far more effective to allow the project to worry about it, letting
+programmers fearlessly contribute at full speed. The way to achieve this is to building a strong, automated, quality ``Wall'' around the code base to protect it from its programmers. The stronger the Wall, the safer programmers will feel.
+
+First, they will make changes and mistakes in their own
+``feature branches'' (in source code management systems).
+Second, they will suggest their changes for merging into the main code base,
+preferably via a pull request. Third, the Wall will validate the changes and
+reject them if it finds any new mistakes. Forth, when the author removes all the errors, the changes will be merged by the Wall.
+
+Here are a few technical and organizational measures a software
+project can take to build such a Wall and protect the source code against its programmers
+(in order of complexity and importance).
+
+\textbf{Automated build} aggregates most of the techniques listed below,
+with the help of Maven, Grunt, Gradle, Rake or similar ``builders.'' The
+automation of a build provides a guarantee that no important steps will be missed,
+no matter how many times the build is executed. Configuring the build
+often is a complicated task where responsibility rests with software architects or DevOps. Usually, the build is automated at the beginning
+of the project, and its configuration is maintained through its entire
+lifecycle.
+
+Each programmer can run the build in a so-called ``pre-flight'' mode, on
+his or her laptop, to make sure the Wall does not reject the changes. This
+is not a guarantee, of course, since the build's environment may differ, affecting the result of the build.
+
+Unfortunately, testing everything in an automated manner is not possible
+due to unbreakable dependencies, like databases, production data sources,
+network resources, etc. Modern containerization solutions like Docker or Vagrant
+seriously help, but cannot solve the problem of ``build stability'' entirely.
+When the build is unstable---fails sporadically with very little
+predictability---programmers lose trust in the automation, and their
+frustration grows. Until decent stability is achieved, it would
+not be possible to enforce the Wall and require all project members
+to pass its automated gate checks.
+
+\textbf{Unit and integration tests} that validate the correctness of the
+software modules by running them with a pre-defined set of input parameters
+and comparing their output against pre-defined expectations. Unit tests
+by definition are more stable than integration ones because they have
+less external dependencies. However, without integration tests, it is almost
+impossible to guarantee that the entire application works as a whole.
+
+``Automated tests'' would be a better name for them all, since the distinction
+between unit and integration tests is rather vague. Test automation,
+even though commonly accepted as a best-practice for software
+development, is not used as widely as software developers themselves would
+prefer, due to many variables, including legacy code, lack of experience,
+low-quality code, high code complexity, and many others. However, without a decent
+amount of automated tests, it is impossible to put the quality Wall
+philosophy into action because automated tests are the strongest quality gatekeeper.
+
+\textbf{Mandatory coverage threshold} is a metric collected from a set of tools like JaCoCo or
+Cobertura used right after running automated tests. If the actual amount of code covered by tests is lower than a pre-configured threshold, the build fails. It is
+expected that the higher the threshold is, the stronger the code protection with
+automated tests is. The Wall must reject modifications if the coverage
+is lower than the threshold.
+
+This is not as simple as it sounds, though.
+First, ``100\% coverage is not a sufficient condition for good quality,''
+according to~\textcite{prause2017}.
+Second the metric itself is far more complicated than a simple number;
+according to~\textcite{shahid2011} it includes ``12 coverage item types like statement,
+branch, block, decision, condition, method, class, package,
+requirement, and data flow coverage.''
+However, despite all those limitations, the presence of coverage control
+makes the Wall stronger.
+
+\textbf{Mutation coverage threshold} collected from a mutation testing
+framework makes micro-modifications to software modules, creating
+so-called ``mutants.'' Next, automated tests are executed with an intent
+to calculate the number of failures, called ``killed mutants.'' The higher
+the amount of successful killings, the higher the coverage.
+Additionally, the Wall must reject modifications if the coverage
+is lower than the threshold.
+
+\textbf{Mandatory static analysis} with many pre-configured analyzers, like
+Checkstyle, Rubocop or PMD which go through the entire code base and
+find potentially problematic code blocks. They do not compile or execute the
+code. Instead, they find where the code violates the rules and coding
+conventions. The most powerful tools have hundreds of rules to apply,
+for example, Qulice---an aggregator of Checkstyle, PMD, and
+FindBugs---contains over 900 rules. Any violation of the rules means that the Wall must reject the modifications.
+
+However, as~\textcite{johnson2013} demonstrated, modern static analysis tools are
+far from perfect, for example, producing many false positives, causing
+dissatisfaction and rejection among programmers.
+
+\textbf{Multi-step code reviews}, which must be mandatory for each
+change set that programmers introduce. Automated tests or static analyzers cannot catch every defect. Having several reviewers will increase the
+quality and protect the project source code even better. The Wall, through
+technical and organizational measures, must ensure that no modifications
+can go through unless they are being reviewed.
+
+Even though this sounds obvious and easy, the industry still has much to improve. According to \textcite{ciolkowski2003}, many companies
+``conduct reviews regularly but often unsystematically'' and
+``don't exploit [these] reviews' full potential for defect reduction and quality control.''
+
+\textbf{Read-only master branch}, which nobody can push to, except the Wall.
+The restriction must be both technical and organizational. Without such
+a restriction it would be impossible to enforce everything listed above, since,
+under stress and business pressure there always will be a great deal of temptation
+to go around the Wall and make modifications directly to the main code repository.
+By making such a workaround technically and organizationally impossible, the
+project will guarantee that the Wall is fully protecting the quality
+of its source code.
+
+Potentially, there could be other obstacles intentionally created
+in front of programmers to make their lives more difficult
+before the merge. As \textcite{nygard18} said in his book \citetitle{nygard18}:
+``Each stage of a build pipeline is looking for reasons to reject the build. Tests
+failed? Reject it. Lint complains? Reject it. Build fails integration
+tests in staging? Reject it. Finished archive smells funny? Reject it.''
+In other words, the faster and the cheaper we can reject the changes,
+the better greater benefits for the project.
+
+The question is, how can a programmer deliver faster if there are so many restrictions in the
+process and the code repository? There are many tricks, some that may look
+shady if the project is fragile and cannot protect itself. However, when the Wall fully protects the project, these methods will benefit everybody:
+
+\textbf{Make changes smaller}. Thanks to significant barriers, the risk of pull
+  request rejection is very high. A smart programmer will try to make a few small
+  pull requests, which will have higher changes to be merged, instead of aiming
+  for perfection and trying to solve and deliver the entire scope in one round.
+
+\textbf{Push back}. When a problem is too complex and depends on other legacy code
+  blocks, a smart programmer should not try to fix them all inside one pull
+  request. Instead, reporting bugs and asking the project to fix the
+  dependencies first would be a wiser move.
+
+\textbf{Break things}. A properly protected codebase encourages programmers not to be
+  afraid of breaking it. The less they care about the entire code base's overall
+  stability (the architect should care about this), the faster they move forward,
+  the more the project benefits.
+
+\textbf{Isolate changes}. Trying to see the code base as a whole, studying the ``big
+  picture'' and thinking about the consequences slows the programming
+  process. Smart programmers try to isolate their efforts and focus on
+  particular issues and features, letting the project and its architect worry
+  about the overall result.
+
+There must be a permanent conflict between a project and its
+programmers: 1) the project must be configured to reject anything that decreases the quality of
+its artifacts and 2) programmers must be interested in making changes to
+those artifacts. The project cares about the quality; the programmers care about
+modifications and fast delivery.
+
+If these two interests conflict, a high-quality product will be created and grow rapidly. The project will enforce quality, and programmers will
+push the code forward, making changes fast and frequently.
+
+Unfortunately, most projects have a very different philosophy. They delegate
+quality control to programmers, hoping that they will ``do no evil.'' This leads to
+frustration, distress, constant fear of mistakes, long delays, blaming, and shaming.
+In the end, both the project and its programmers lose.
+
+Of course, not every project will be able to configure itself in the most
+effective way. Most projects do not even know how to do it. In those projects, if
+developers ``step on the gas,'' they will most likely ruin the code base in a
+few days. This is why we must be careful with encouraging programmers to speed up
+until the quality Wall is strong enough. It is also important to remember
+that building the Wall from scratch is usually a prolonged process that requires
+a lot of investments from programmers, architects, and managers.
+Declaring intentions is not enough. First of all, the
+source code itself will not be ready to reject low-quality modifications, because
+it will not be possible to differentiate low-quality from high-quality code. It will
+take a significant amount of time until it will be possible to start making
+grounded rejection decisions in an automated way.
+
+However, once the first version of the Wall is ready
+and the source code begins protecting itself, the team will start
+seeing serious improvement in performance with an overall increase in the satisfaction of their work.
+
+
+\end{document}

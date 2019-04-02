@@ -1,0 +1,67 @@
+\documentclass{main}
+\title{Creative Programmers May Be Dangerous}
+\begin{document}
+\begin{abstract}
+Letting programmers use each and every possible technique and design pattern may lead to low quality of code;
+that's why it's desirable to keep their imagination under strict control.
+\end{abstract}
+
+``Another lesson we should
+have learned from the recent past is
+that the development of `richer' or
+`more powerful' programming languages
+was a mistake in the sense
+that these baroque monstrosities,
+these conglomerations of idiosyncrasies,
+are really unmanageable, both
+mechanically and mentally,'' said \textcite{dijkstra1972}.
+
+``The more unconstrained degrees of freedom there are in the software
+development process, the more opportunity there will be for
+unexpected outcomes... Every programmer should produce essentially the
+same code for the same design.'' said \textcite{munson2003}.
+
+Expressiveness (or expressive power) was traditionally considered a virtue of programming languages.
+Some of the examples are:
+
+Syntactic sugar. Most modern programming languages are proud of syntax
+  features that make code more compact and elegant.
+
+Domain Specific Languages. Libraries like Nokogiri build their own
+  syntax layer on top of the existing programming language, which is more
+  compact and expressive.
+
+Default arguments. In some programming languages, like Ruby and PHP,
+  it's possible to free programmers from the necessity to specify
+  all arguments of a function when calling it; omitted parameters will
+  be assigned to default values.
+
+Lose typing. Weak and dynamic typing (like JavaScript and Ruby)
+  make code shorter, comparing to strong and static typing (like C++ and Java).
+
+Larger monitors. Both hardware and software allow to display bigger
+  pieces of code, both horizontally and vertically, helping programmers
+  be much freer in their code writing and formatting decisions.
+
+However, static analyzers are going in the opposite direction,
+making many expressive practices illegal.
+For example, tternary boolean operator and
+postfix increment operator ++ are prohibited by Checkstyle in Java, even
+though the former one turns a six-lines code block into a one-liner---they
+both are considered too confusing for the reader.
+
+Each programming language has its own set of static analyzers: ...
+
+Quality of code is a very important component of the overall product quality.
+
+Readability of code is the key contributor to its quality.
+
+It seems that the more expressive programmers are, the lower the readability.
+
+Mostly because all programmers have their own unique understandings of what is right and how the code should look like.
+
+Hence, uniformity of code makes it more readable to a bigger amount of people.
+
+Thus, the more creative and imaginative is the programmer, the lower the quality of code he or she may produce, if not being restricted.
+
+\end{document}

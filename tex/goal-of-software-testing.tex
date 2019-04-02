@@ -1,0 +1,96 @@
+\documentclass{main}
+\title{The Goal of Software Testing}
+\begin{document}
+\begin{abstract}
+You gather up your team of testers. You throw them some money. You give them on
+a schedule. And then you sit back and watch them go, tearing through your
+product trying to break it. They find bugs, report them, find more bugs, report
+those too. Soon enough they’ll leave you with the perfect product ready to ship
+without any worries and total customer satisfaction. Right? Wrong.
+\end{abstract}
+
+In \href{https://amzn.to/2L5lGXC}{\emph{The Art of Software Testing}} (2011), Dr. Glenford Myers explains that ``testing is the
+process of executing a program with the intent of finding errors.''
+Testing fails because the intentions behind the task are very often misplaced. Finding
+errors is not the same strategy as making sure that a product works.
+Instead of focusing on whether the product functions under parameters,
+the main focus of a testing team must center on discovering bugs. This ``destructive, even sadistic,
+process'' as Dr. Myer’s calls it, focuses on breaking the product, looking for
+various inputs to crash under stress.
+
+However, most testers feel like they're helping ensure the product's success, when in
+fact, they're missing that component altogether.
+Dr. Myers notes this misguided focus stating, ``You cannot test a program
+to guarantee that it is error free.'' Software by nature has an
+unlimited number of bugs. Boris Beizer said in
+\href{https://amzn.to/2H5yuur}{\emph{Software Testing Techniques}} (1995):
+``The probability of showing that the software works decreases as
+testing increases; that is, the more you test, the likelier you
+are to find a bug. Therefore, if your objective is to demonstrate
+a high probability of working, that objective is best achieved by
+not testing at all!''
+Most testers fail to understand this. They tend
+to see it as a neatly packaged product that only needs a bit of polishing to run smooth.
+
+The real number can be limitless. No matter how big or small, simple or complex, old
+or new a product is, the potential for bugs is astronomical.
+Dr. Myers underscores this arguing that ``it is impractical,
+often impossible, to find all the errors in a program.'' Even with limitless
+time and funding, testers cannot find all the bugs.
+Bill Hetzel in his book \href{https://amzn.to/2JhnLCd}{\emph{The Complete Guide to Software Testing}} (1993) said that
+``we cannot achieve 100 percent confidence no matter how much time and energy we put into it!''
+William~E. Lewis in his book
+\href{https://amzn.to/2sqPvdg}{\emph{Software Testing and Continuous Quality Improvement}} (2009)
+even calls this a ``testing paradox,'' which has
+``two underlying and contradictory objectives: to give confidence that the product is working well and
+to uncover errors in the software product before its delivery to the customer.''
+And if this is the case, then what do you do?
+
+There has to be a certain point where testers stop looking for bugs.
+Dr. Meyers points out that ``one of the most difficult questions to answer
+when testing a program is determining when to stop since there is no way
+of knowing if the error just detected is the last remaining error.''
+Finding bugs motivates testers, and they'll keep looking for them. At some point,
+you have to launch the product. But what happens though if you launch a
+product before you find all the bugs? If you do that, then won't you launch it with bugs?
+Yes!
+
+Despite all that work, all that money, all that effort, you still
+launched a program riddled with bugs. It seems rather pointless. Your product
+is out there flawed. Filled with bugs. But you have to ask yourselves, how many
+critical bugs remain? You could have provided your team more time to
+complete the impossible task of finding all the bugs, but would they have
+found more critical bugs?
+
+It's better to launch a product that you have confidence in than waste time
+and resources trying to make it perfect. Quality control will always find
+itself pressed hard against the deadline. But there are solutions you
+can take to make sure testing benefits the product.
+Instead of allowing testers endless time to find errors as they tear apart
+the programming, give your testers a goal. Dr. Meyers notes that
+``since the goal of testing is to find errors, why not make the completion
+criterion the detection of some predefined number of errors?''
+This enforces the need to find bugs, but limits the total amount and
+draws focus towards critical bugs rather than general ones.
+
+Once testers pass that marker, you then have clear confidence that the
+product will successfully launch. ``Software is released for use, not when
+it is known to be correct,'' David West in \href{https://amzn.to/2xsEhuz}{\emph{Object Thinking}} (2004) points out,
+``but when the rate of discovering errors slows down to one that management
+considers acceptable." At some point, there needs to be a line,
+a limit, a goal. If your testers lack a goal, then they end up wasting
+time and money finding bugs that most likely don't improve the overall
+quality of the product.
+Steve McConnell in \href{https://amzn.to/2JhnDCJ}{\emph{Software Project Survival Guide}} (1998) even suggests that
+``by comparing the number of new defects to the number of defects
+resolved each week, you can determine how close the project is to completion.''
+
+By setting a definite limit for the testers, you guide their targeted approach
+to product testing with a pre-determined goal. This goal helps testers rid
+the program of enough bugs for it to run smoothly after launch. If
+you don't do that, you could end up spending unnecessary time and money
+finding and removing bugs that may not even be a problem. I briefly
+described this concept in my blog post
+\href{https://www.yegor256.com/2015/09/10/testing-exit-criteria.html}{When Do You Stop Testing?} (2015).
+
+\end{document}

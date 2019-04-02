@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rainbow (3.0.0)
+    rake (12.3.1)
+    redcarpet (3.4.0)
+
+PLATFORMS
+  ruby
+  x86_64-darwin-18
+
+DEPENDENCIES
+  rainbow (= 3.0.0)
+  rake (= 12.3.1)
+  redcarpet (= 3.4.0)
+
+RUBY VERSION
+   ruby 2.6.0p0
+
+BUNDLED WITH
+   1.17.2
