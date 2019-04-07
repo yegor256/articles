@@ -2,47 +2,48 @@
 \title{Blockchain Was the First, But Will Not Remain the Only}
 \begin{document}
 \begin{abstract}
-One of the most visible technical innovation of the last ten years,
+One of the most visible technical innovations of the last ten years,
 aside from the promise to get tourists on Mars, is Blockchain. However,
-due to the large amount of marketing noise and financial speculations, many
+due to the large amount of marketing noise and financial speculation, many
 of us missed the technical trend this technology has successfully started.
-The trend, which can be labeled as Zero-Trust Decentralization (ZTD), and
-which is truly unique and new. What is the future of it and should we
+The trend can be labeled Zero-Trust Decentralization (ZTD), and it
+is truly unique and new. What is its future, and should we
 expect other products aside from Blockchain?
 \end{abstract}
 
 Decentralized systems are not new at all. Take, for example, Torrent, a file sharing
-protocol. It doesn't have a cental place of control, each node
+protocol. It doesn't have a cental place of control. Each node
 works indendently and anonymously, sending parts of the data to other nodes
 and receiving other parts back.  However, despite our inability to trust
-any individual node, the receiver of a file has a guarantee that it is
+any individual node, the recipient of a file has a guarantee that it is
 exactly the file that was initially injected into the network by its sender.
-This guarantee is pretty easy to achieve just by checking hash-codes
-of file parts and verifying them later at the time of receiving.
+This guarantee is fairly easy to achieve just by checking hash-codes
+of file parts and verifying them later at the time they are received.
 
 Technically speaking, Torrent is a single-transaction system, where the
 receiver and the sender trust each other. They only don't trust the system,
-that's why they use checksums to make sure there were no data corruption
+that's why they use checksums to make sure there was no data corruption
 on the way.
 
-A bigger problem arrises when the receiver doesn't trust the system \emph{and}
+A bigger problem arises when the receiver doesn't trust the system \emph{or}
 the sender. A digital money sending business case is a perfect example. If money
 is sent via, say, \href{https://www.paypal.com}{PayPal}, the receiver doesn't trust the sender, but it
 does trust the system. The centralized database of PayPal Inc. guarantees
-the seller of a book that the payment with its unique ID will
-not disappear from the database after the book is shipped.
+the seller of a book that the payment, with its unique ID, will
+not disappear from the database after the book is shipped. But what if we also didn't trust
+the PayPal system?
 
-Is it possible to create an architecture, where both the sender and the system
-will be anonymous and untrustable, but the combination of all participants will
-make the entire system trustable, to some extent? Blockchain was the first
+Is it possible to create an architecture where both the sender and the system
+are anonymous and untrustworthy, but the combination of all participants
+makes the entire system trustworthy to some extent? Blockchain was the first
 solution which suggested that it was indeed possible.
 
 In Blockchain, each node maintains the entire ledger of transactions
 connected sequentially and signed with expensive hash codes. In order to modify
 a transaction in the middle of the ledger a sender would have to recalculate
-all hash codes coming after it, which is, the longer the tail of the ledger,
-the more time consuming operation. On ther other hand,
-if such a recalculation won't be done and the sender just changes the
+all the hash codes coming after it, which is a very time-consuming operation,
+and all the more so as the tail of the ledger lengthens. On the other hand,
+if such a recalculation is not done and the sender just changes the
 transaction in the middle of the ledger, other nodes won't believe it and
 will reject the modification. That's how their software is designed to behave
 and they all have the same version of the software on-board.
@@ -50,32 +51,32 @@ and they all have the same version of the software on-board.
 This seems to be a solid concept, which proved itself in a number of real-life
 applications, including Bitcoin and many other Blockchain-based cryptocurrencies.
 However, this is just the beginning. This is the first, but not the only
-possible solution in the terrory of Zero-Trust Decentralization. There
-are others, for example, based on Decentralized Acyclic Graph (used in
-IOTA and ByteBall cryptocurrencies, for example).
+possible solution in the territory of Zero-Trust Decentralization. There
+are some, for example, based on Directed Acyclic Graphs, such as those used in
+the IOTA and ByteBall cryptocurrencies.
 
 \href{https://www.zold.io}{Zold}, yet another solution, which was invented and
 developed by the author, shifts
-the decision of trust to the client's side, allowing money receiving
-software decide, which node has a more trustable version of the data. The data
-coming from the majority of nodes will be considered as more trustable.
+the decision of trust to the client's side, allowing the money-receiving
+software to decide which node has a more trustworthy version of the data. The data
+coming from the majority of nodes will be considered as the most trustworthy.
 A more detailed explanation of the architecture can be found in the
 \href{https://papers.zold.io/wp.pdf}{White Paper}.
 
-It is only reasonable to believe that there will more solutions to solve
-the same problem. They will use different principles of data organizations,
-to guarantee trust, and will have their own advantages and drawbacks. One of the
-most visible disadvantage of Blockchain, for example, is its speed of transaction processing.
+It is only reasonable to believe that there will be more attempts to solve
+the same problem. They will use different principles of data organization,
+different way to guarantee trust, and will have their own advantages and drawbacks. One of the
+most visible disadvantages of Blockchain, for example, is its speed of transaction processing.
 Obviously, since all transactions must be inserted
-sequentially into the same ledger, it's impossible to achieve high speed
+sequentially into the same ledger, it's impossible to achieve a high speed
 of processing, unless some additional optimization is applied
-(Bitcoin lighting network and side-chains are just a few examples).
+(the Bitcoin Lightning Network and side-chains are examples).
 
 Thus, the future of Zero-Trust Decentralization is indeed full of innovative
 and interesting solutions. However, our current primary focus on Blockchain is
-a potential threat to the development of those innovations. We must
-admit that Blockchain was a great concept, which opened the door to the
+a potential threat to the further development of these innovations. We must
+admit that Blockchain was a great concept which opened the door to the
 new technical domain, but it's time to start researching and finding
-better or just different alternatives.
+better and more varied alternatives.
 
 \end{document}
